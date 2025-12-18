@@ -3,8 +3,8 @@ import styles from "./VoteOptions.module.css";
 
 interface VoteOptionsProps {
   onVote: (type: VoteType) => void;
-  onReset?: () => void;
-  canReset?: boolean;
+  onReset: () => void;
+  canReset: boolean;
 }
 
 const VoteOptions = ({ onVote, onReset, canReset }: VoteOptionsProps) => {
@@ -19,11 +19,14 @@ const VoteOptions = ({ onVote, onReset, canReset }: VoteOptionsProps) => {
       <button className={styles.button} onClick={() => onVote("bad")}>
         Bad
       </button>
-      <button
-        className={`${styles.button} ${FileSystemWritableFileStream.reset}`}
-      >
-        Reset
-      </button>
+      {canReset && (
+        <button
+          className={`${styles.button} ${styles.reset}`}
+          onClick={onReset}
+        >
+          Reset
+        </button>
+      )}
     </div>
   );
 };
